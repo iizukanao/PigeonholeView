@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PigeonholeView</string>
+
+    <string name="action_add">Add</string>
+</resources>

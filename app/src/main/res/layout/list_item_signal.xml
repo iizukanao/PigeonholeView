@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- represents a button in Buttons screen -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/grid_signal_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        android:contentDescription="Icon"
+        android:scaleType="fitCenter" />
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dip"-->
+    <!--android:layout_weight="1"-->
+
+    <TextView
+        android:id="@+id/grid_signal_name"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="none"
+        android:fontFamily="sans-serif-condensed"
+        android:padding="0dp"
+        tools:ignore="UnusedAttribute" />
+</LinearLayout>

@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowActionBarOverlay" tools:ignore="NewApi">true</item>
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+
+        <!-- Change the style of ActionBar -->
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/MyActionBar</item>
+        -->
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/action_bar</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@drawable/action_bar</item>
+    </style>
+
+</resources>

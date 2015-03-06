@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <!-- do not add any padding here -->
+
+    <net.kyu_mu.pigeonholeview.PigeonholeView
+        android:id="@+id/example_pigeonhole_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        custom:cellHeight="88dp"
+        custom:cellWidth="80dp"
+        custom:dragStartAnimationDuration="100"
+        custom:dropAreaText="Drop here to edit"
+        custom:dropAreaTopPadding="10dp"
+        custom:topSpaceHeight="?attr/actionBarSize" />
+
+</RelativeLayout>

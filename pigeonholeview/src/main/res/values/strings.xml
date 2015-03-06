@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PigeonholeView</string>
+    <string name="drop_area__text">Drop here to edit</string>
+</resources>

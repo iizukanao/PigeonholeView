@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PigeonholeView">
+        <attr name="dragStartAnimationDuration" format="integer" />
+        <attr name="editable" format="boolean" />
+        <attr name="topSpaceHeight" format="dimension" />
+        <attr name="cellWidth" format="dimension" />
+        <attr name="cellHeight" format="dimension" />
+        <attr name="dropAreaTopPadding" format="dimension" />
+        <attr name="dropAreaText" format="string" />
+    </declare-styleable>
+</resources>
