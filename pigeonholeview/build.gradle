@@ -26,7 +26,7 @@ def siteUrl = 'https://github.com/iizukanao/PigeonholeView'
 def gitUrl = 'https://github.com/iizukanao/PigeonholeView.git'
 def projectName = 'PigeonholeView'
 def projectDescription = 'Grid-based reorderable view like Android home screen'
-group = "net.kyu_mu.pigeonholeview"
+group = "net.kyu_mu"
 
 install {
     repositories.mavenInstaller {
