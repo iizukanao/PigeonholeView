@@ -965,15 +965,20 @@ public class PigeonholeView<T> extends ViewGroup {
         final int action = MotionEventCompat.getActionMasked(ev);
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                final int pointerIndex = MotionEventCompat.getActionIndex(ev);
-                final float x = MotionEventCompat.getX(ev, pointerIndex);
-                final float y = MotionEventCompat.getY(ev, pointerIndex);
+                try {
+                    final int pointerIndex = MotionEventCompat.getActionIndex(ev);
+                    final float x = MotionEventCompat.getX(ev, pointerIndex);
+                    final float y = MotionEventCompat.getY(ev, pointerIndex);
 
-                // Remember where we started (for dragging)
-                lastTouchX = x;
-                lastTouchY = y;
-                // Save the ID of this pointer (for dragging)
-                activePointerId = MotionEventCompat.getPointerId(ev, 0);
+                    // Remember where we started (for dragging)
+                    lastTouchX = x;
+                    lastTouchY = y;
+                    // Save the ID of this pointer (for dragging)
+                    activePointerId = MotionEventCompat.getPointerId(ev, 0);
+                } catch (IllegalArgumentException ex) { // pointerIndex out of range
+                    Log.e(TAG, "IllegalArgumentException: " + ex.getMessage());
+                    return false;
+                }
                 break;
             }
             case MotionEvent.ACTION_UP: {
@@ -1011,10 +1016,14 @@ public class PigeonholeView<T> extends ViewGroup {
     private void onMouseActionUp(MotionEvent ev) {
         if (isDragging) {
             isDragging = false;
-            final int pointerIndex = MotionEventCompat.findPointerIndex(ev, activePointerId);
-            final float x = MotionEventCompat.getX(ev, pointerIndex);
-            final float y = MotionEventCompat.getY(ev, pointerIndex);
-            endDrag(x, y);
+            try {
+                final int pointerIndex = MotionEventCompat.findPointerIndex(ev, activePointerId);
+                final float x = MotionEventCompat.getX(ev, pointerIndex);
+                final float y = MotionEventCompat.getY(ev, pointerIndex);
+                endDrag(x, y);
+            } catch (IllegalArgumentException ex) { // pointerIndex out of range
+                Log.e(TAG, "IllegalArgumentException: " + ex.getMessage());
+            }
         }
         resetDragState();
     }
@@ -1096,84 +1105,94 @@ public class PigeonholeView<T> extends ViewGroup {
         final int action = MotionEventCompat.getActionMasked(ev);
         switch (action) {
             case MotionEvent.ACTION_DOWN: {
-                final int pointerIndex = MotionEventCompat.getActionIndex(ev);
-                final float x = MotionEventCompat.getX(ev, pointerIndex);
-                final float y = MotionEventCompat.getY(ev, pointerIndex);
+                try {
+                    final int pointerIndex = MotionEventCompat.getActionIndex(ev);
+                    final float x = MotionEventCompat.getX(ev, pointerIndex);
+                    final float y = MotionEventCompat.getY(ev, pointerIndex);
 
-                // Remember where we started (for dragging)
-                lastTouchX = x;
-                lastTouchY = y;
-                // Save the ID of this pointer (for dragging)
-                activePointerId = MotionEventCompat.getPointerId(ev, 0);
+                    // Remember where we started (for dragging)
+                    lastTouchX = x;
+                    lastTouchY = y;
+                    // Save the ID of this pointer (for dragging)
+                    activePointerId = MotionEventCompat.getPointerId(ev, 0);
+                } catch (IllegalArgumentException ex) { // pointerIndex out of range
+                    Log.e(TAG, "IllegalArgumentException: " + ex.getMessage());
+                    return false;
+                }
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
                 if (activePointerId != MotionEvent.INVALID_POINTER_ID) {
-                    final int pointerIndex = MotionEventCompat.findPointerIndex(ev, activePointerId);
-                    final float x = MotionEventCompat.getX(ev, pointerIndex);
-                    final float y = MotionEventCompat.getY(ev, pointerIndex);
+                    try {
+                        final int pointerIndex = MotionEventCompat.findPointerIndex(ev, activePointerId);
+                        final float x = MotionEventCompat.getX(ev, pointerIndex);
+                        final float y = MotionEventCompat.getY(ev, pointerIndex);
 
-                    // Calculate the distance moved
-                    final float dx = x - lastTouchX;
-                    final float dy = y - lastTouchY;
+                        // Calculate the distance moved
+                        final float dx = x - lastTouchX;
+                        final float dy = y - lastTouchY;
 
-                    posX += dx;
-                    posY += dy;
-                    if (hoverCellData != null) { // User is dragging a cell
-                        View cellView = hoverCellData.getView();
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                            cellView.setX(posX);
-                            cellView.setY(posY);
-                        } else {
-                            cellView.layout((int) posX, (int) posY, (int) (posX + widthPerCell), (int) (posY + heightPerCell));
-                        }
-                        int hoverPosition = getPositionForXY(x, y);
-                        if (hoverPosition != currentHoverPosition) {
-                            cancelSwapCandidate();
-                            swapCandidateCellData = null;
-                        }
-                        if (hoverPosition == POSITION_DROP_AREA) {
-                            editDropAreaView.setBackgroundResource(R.drawable.drop_area_highlight);
-                        } else {
-                            editDropAreaView.setBackgroundResource(R.drawable.drop_area);
-                        }
-                        Point hoverPoint = getColRowForXY(x, y);
-                        if (hoverPoint != null) {
-                            // Show the drop target
-                            Point hoverXY = getXYForColRow(hoverPoint.x, hoverPoint.y);
-                            dropTargetView.setVisibility(View.VISIBLE);
+                        posX += dx;
+                        posY += dy;
+                        if (hoverCellData != null) { // User is dragging a cell
+                            View cellView = hoverCellData.getView();
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                                dropTargetView.setX(hoverXY.x);
-                                dropTargetView.setY(hoverXY.y);
+                                cellView.setX(posX);
+                                cellView.setY(posY);
                             } else {
-                                dropTargetView.layout(
-                                        hoverXY.x,
-                                        hoverXY.y,
-                                        (int) (hoverXY.x + widthPerCell),
-                                        (int) (hoverXY.y + heightPerCell)
-                                );
+                                cellView.layout((int) posX, (int) posY, (int) (posX + widthPerCell), (int) (posY + heightPerCell));
                             }
-
-                            CellData<T> dropTargetCellData = cellMap.get(hoverPosition);
-                            if (dropTargetCellData != null) {
-                                if (hoverPosition != currentHoverPosition) {
-                                    // Move the drop target cell
-                                    swapCandidateCellData = dropTargetCellData;
-                                    swapCandidateEffect();
+                            int hoverPosition = getPositionForXY(x, y);
+                            if (hoverPosition != currentHoverPosition) {
+                                cancelSwapCandidate();
+                                swapCandidateCellData = null;
+                            }
+                            if (hoverPosition == POSITION_DROP_AREA) {
+                                editDropAreaView.setBackgroundResource(R.drawable.drop_area_highlight);
+                            } else {
+                                editDropAreaView.setBackgroundResource(R.drawable.drop_area);
+                            }
+                            Point hoverPoint = getColRowForXY(x, y);
+                            if (hoverPoint != null) {
+                                // Show the drop target
+                                Point hoverXY = getXYForColRow(hoverPoint.x, hoverPoint.y);
+                                dropTargetView.setVisibility(View.VISIBLE);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                                    dropTargetView.setX(hoverXY.x);
+                                    dropTargetView.setY(hoverXY.y);
+                                } else {
+                                    dropTargetView.layout(
+                                            hoverXY.x,
+                                            hoverXY.y,
+                                            (int) (hoverXY.x + widthPerCell),
+                                            (int) (hoverXY.y + heightPerCell)
+                                    );
                                 }
+
+                                CellData<T> dropTargetCellData = cellMap.get(hoverPosition);
+                                if (dropTargetCellData != null) {
+                                    if (hoverPosition != currentHoverPosition) {
+                                        // Move the drop target cell
+                                        swapCandidateCellData = dropTargetCellData;
+                                        swapCandidateEffect();
+                                    }
+                                }
+                            } else {
+                                // Hide the drop target
+                                dropTargetView.setVisibility(View.GONE);
                             }
-                        } else {
-                            // Hide the drop target
-                            dropTargetView.setVisibility(View.GONE);
+                            currentHoverPosition = hoverPosition;
                         }
-                        currentHoverPosition = hoverPosition;
+
+                        invalidate(); // TODO: Is this necessary?
+
+                        // Remember this touch position for the next move event
+                        lastTouchX = x;
+                        lastTouchY = y;
+                    } catch (IllegalArgumentException ex) { // pointerIndex out of range
+                        Log.e(TAG, "IllegalArgumentException: " + ex.getMessage());
+                        return false;
                     }
-
-                    invalidate(); // TODO: Is this necessary?
-
-                    // Remember this touch position for the next move event
-                    lastTouchX = x;
-                    lastTouchY = y;
 //                } else {
 //                    // First pointer down -> second pointer down -> first pointer up -> second pointer drag -> (here)
                 }
