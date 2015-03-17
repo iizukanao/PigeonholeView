@@ -64,7 +64,7 @@ install {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:support-v4:21.0.3"
+    compile "com.android.support:support-v4:22.0.0"
 }
 
 task sourcesJar(type: Jar) {
