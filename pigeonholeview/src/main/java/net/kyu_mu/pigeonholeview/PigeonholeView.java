@@ -484,8 +484,12 @@ public class PigeonholeView<T> extends ViewGroup {
                 cellView.setOnLongClickListener(new OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
-                        startDrag(cellData);
-                        return true;
+                        if (isDragging) {
+                            return false;
+                        } else {
+                            startDrag(cellData);
+                            return true;
+                        }
                     }
                 });
                 if (!editable) {
@@ -566,8 +570,12 @@ public class PigeonholeView<T> extends ViewGroup {
             cellView.setOnLongClickListener(new OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    startDrag(cellData);
-                    return true;
+                    if (isDragging) {
+                        return false;
+                    } else {
+                        startDrag(cellData);
+                        return true;
+                    }
                 }
             });
             if (!editable) {
@@ -915,6 +923,10 @@ public class PigeonholeView<T> extends ViewGroup {
      * @param cellData CellData that is started dragging
      */
     private void startDrag(CellData<T> cellData) {
+        if (isDragging) { // Another cell is being dragged
+            return;
+        }
+
         if (listener != null) {
             listener.onDragStart();
         }
