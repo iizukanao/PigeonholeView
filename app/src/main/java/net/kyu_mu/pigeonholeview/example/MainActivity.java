@@ -68,15 +68,15 @@ public class MainActivity extends ActionBarActivity implements PigeonholeView.Pi
             }
 
             @Override
-            public View getView(View existingView, MyData signal) {
+            public View getView(View existingView, MyData item) {
                 if (existingView == null) {
                     LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                    existingView = inflater.inflate(R.layout.list_item_signal, pigeonholeView, false);
+                    existingView = inflater.inflate(R.layout.list_item, pigeonholeView, false);
                 }
-                ImageView imageView = (ImageView) existingView.findViewById(R.id.grid_signal_image);
-                imageView.setImageResource(signal.getImageResourceId());
-                TextView nameTextView = (TextView) existingView.findViewById(R.id.grid_signal_name);
-                nameTextView.setText(signal.getName());
+                ImageView imageView = (ImageView) existingView.findViewById(R.id.item_image);
+                imageView.setImageResource(item.getImageResourceId());
+                TextView nameTextView = (TextView) existingView.findViewById(R.id.item_name);
+                nameTextView.setText(item.getName());
                 return existingView;
             }
 
