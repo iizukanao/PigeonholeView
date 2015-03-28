@@ -240,12 +240,12 @@ MainActivity.java:
          */
         @Override
         public void onEditObject(MyData myData) {
-            // To update the cell:
+            // To update the cell data:
             myData.setName("Updated");
             myData.setImageResourceId(android.R.drawable.ic_menu_edit);
             pigeonholeView.updateEditingObject();
 
-    //        // To delete:
+    //        // To delete the cell:
     //        myDataList.remove(myData);
     //        pigeonholeView.deleteEditingObject();
 
