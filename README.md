@@ -3,13 +3,13 @@ Grid-based reorderable view like Android home screen
 ![Screenshot](images/normal.png)
 ![Edit mode](images/edit.png)
 
-# Download
+## Download
 
 If you are using Android Studio, add the following line to the `dependencies` section in your module-level build.gradle.
 
     compile 'net.kyu_mu:pigeonholeview:1.0.3'
 
-# Usage
+## Usage
 
 An example app is available at [app](app) directory. To run the example app, open this top-level directory in Android Studio and press the "Run" button.
 
