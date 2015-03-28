@@ -282,7 +282,7 @@ To check whether the PigeonholeView is full:
         // Add a button
     }
 
-### Setting edit mode
+### Changing edit mode
 
 To disable edit mode dynamically:
 
