@@ -294,6 +294,10 @@ To enable edit mode dynamically:
 
 To disable edit mode in xml, add `custom:editable="false"` attribute to PigeonholeView element. Edit mode is enabled by default.
 
+### XML attributes
+
+![View parameters](images/parameters.png)
+
 ## License
 
     Copyright 2015 Nao Iizuka
