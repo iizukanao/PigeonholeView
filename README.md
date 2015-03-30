@@ -58,7 +58,7 @@ MyData.java:
         }
     }
 
-Then, create an Activity that contains PigeonholeView. In the example below, all parameters prefixed with `custom:` are optional. In order to use `custom:` attributes, you have to add `xmlns:custom="http://schemas.android.com/apk/res-auto"` to the root element.
+Then, create an Activity that contains PigeonholeView. In the example below, all parameters prefixed with `custom:` are optional. In order to use `custom:` attributes, you have to add `xmlns:custom="http://schemas.android.com/apk/res-auto"` to the root element. For details of the attributes, see [XML Attributes](#xml-attributes).
 
 activity_main.xml:
 
@@ -294,7 +294,17 @@ To enable edit mode dynamically:
 
 To disable edit mode in xml, add `custom:editable="false"` attribute to PigeonholeView element. Edit mode is enabled by default.
 
-### XML attributes
+### <a name="xml-attributes"></a>XML attributes
+
+| Attribute                           | Description | Type (default value) |
+| ----------------------------------- | ----------- | -------------------- |
+| `custom:editable`                   | If true, long click is enabled | boolean (true) |
+| `custom:cellWidth`                  | Width of a cell | dimension (80px) |
+| `custom:cellHeight`                 | Height of a cell | dimension (90px) |
+| `custom:topSpaceHeight`             | (See the image below) | dimension (0px) |
+| `custom:dropAreaTopPadding`         | (See the image below) | dimension (20px) |
+| `custom:dropAreaText`               | Text for drop area | string (@string/drop_area__text) |
+| `custom:dragStartAnimationDuration` | Duration of drag start animation in milliseconds | integer (200) |
 
 ![View parameters](images/parameters.png)
 
