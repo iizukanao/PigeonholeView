@@ -87,7 +87,7 @@ Include v7 appcompat Android Support Library in module-level build.gradle.
 
     dependencies {
         compile 'net.kyu_mu:pigeonholeview:1.0.3'
-        compile "com.android.support:appcompat-v7:22.0.0"
+        compile "com.android.support:appcompat-v7:27.1.1"
     }
 
 Edit values/styles.xml and add a custom style (CustomActionBarTheme) that enables ActionBar overlay:
@@ -119,7 +119,7 @@ Set up the view in the code.
 
 MainActivity.java:
 
-    public class MainActivity extends ActionBarActivity implements
+    public class MainActivity extends AppCompatActivity implements
             PigeonholeView.PigeonholeViewListener<MyData> {
 
         private PigeonholeView<MyData> pigeonholeView;

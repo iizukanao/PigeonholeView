@@ -3,11 +3,11 @@ package net.kyu_mu.pigeonholeview.example;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 
 /**
  * Created by nao on 3/6/15.
@@ -26,18 +26,21 @@ public class SelectActionDialogFragment extends DialogFragment {
     private SelectActionDialogFragmentListener SelectActionDialogFragmentListener;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         isFiredEvent = false;
 
-        // Verify that the host activity implements the callback interface
-        try {
-            SelectActionDialogFragmentListener = (SelectActionDialogFragmentListener) activity;
-        } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(activity.toString()
-                    + " must implement SelectActionDialogFragmentListener");
+        if (context instanceof Activity) {
+            Activity activity = (Activity) context;
+            // Verify that the host activity implements the callback interface
+            try {
+                SelectActionDialogFragmentListener = (SelectActionDialogFragmentListener) activity;
+            } catch (ClassCastException e) {
+                // The activity doesn't implement the interface, throw exception
+                throw new ClassCastException(activity.toString()
+                        + " must implement SelectActionDialogFragmentListener");
+            }
         }
     }
 

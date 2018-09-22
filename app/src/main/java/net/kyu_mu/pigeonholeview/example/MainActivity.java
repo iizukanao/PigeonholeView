@@ -2,7 +2,7 @@ package net.kyu_mu.pigeonholeview.example;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +16,7 @@ import net.kyu_mu.pigeonholeview.PigeonholeView;
 import java.util.Iterator;
 
 
-public class MainActivity extends ActionBarActivity implements PigeonholeView.PigeonholeViewListener<MyData>, SelectActionDialogFragment.SelectActionDialogFragmentListener {
+public class MainActivity extends AppCompatActivity implements PigeonholeView.PigeonholeViewListener<MyData>, SelectActionDialogFragment.SelectActionDialogFragmentListener {
     public static final String TAG = MainActivity.class.getSimpleName();
 
     private PigeonholeView<MyData> pigeonholeView;
@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity implements PigeonholeView.Pi
             isEditable = true;
         }
 
-        pigeonholeView = (PigeonholeView<MyData>) findViewById(R.id.example_pigeonhole_view);
+        pigeonholeView = findViewById(R.id.example_pigeonhole_view);
 
         PigeonholeView.DataProvider<MyData> provider = new PigeonholeView.DataProvider<MyData>() {
             @Override
