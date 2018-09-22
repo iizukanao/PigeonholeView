@@ -7,7 +7,7 @@ Grid-based reorderable view like Android home screen
 
 If you are using Android Studio, add the following line to the `dependencies` section in your module-level build.gradle.
 
-    compile 'net.kyu_mu:pigeonholeview:1.0.3'
+    implementation 'net.kyu_mu:pigeonholeview:1.0.4'
 
 ## Usage
 
@@ -86,7 +86,7 @@ activity_main.xml:
 Include v7 appcompat Android Support Library in module-level build.gradle.
 
     dependencies {
-        compile 'net.kyu_mu:pigeonholeview:1.0.3'
+        compile 'net.kyu_mu:pigeonholeview:1.0.4'
         compile "com.android.support:appcompat-v7:27.1.1"
     }
 
